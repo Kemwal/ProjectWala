@@ -1,0 +1,149 @@
+	
+***********************************
+i.
+
+LoanApplication : 
+Application_id (auto generated serial no.),
+application_date(date),
+Loan_program(varchar(10)),
+AmountofLoan(number),
+AddressofProperty(varchar(30)),
+AnnualFamilyIncome(number),
+DocumentProofsAvailable(varchar(50)),
+GuaranteeCover (varchar(20)),
+MarketValueofGuaranteeCover(number), 
+Status(varchar(10)),
+DateOfInterview(date)
+************************************
+	
+	
+	create table loanapplication(
+	application_id number,
+	application_date date,
+	loan_program varchar2(10),
+	AmountOfLoan number,
+	AddressOfProperty varchar2(30),
+	AnnualFamilyIncome number,
+	DocumentProofsAvailable varchar2(50),
+	GuaranteeCover varchar2(20),
+	MarketValueOfGuaranteeCover number,
+	status varchar2(10),
+	DateOfInterview date);
+	
+	
+
+	SQL> INSERT INTO loanapplication values(1001,sysdate,'HL01',2000000,'A32 Adarsh
+    Nagar',700000,'Yes','','','',sysdate+1);
+	
+	
+		
+************************************
+	ii.
+	
+	CustomerDetails:
+	Application_ID(FK),
+	Applicant_name(varchar(20)),
+	date_of_birth (date),
+	marital_status(varchar(10)),
+	phone_number(number), 
+	mobile_number(number), 
+	CountofDependents(number),
+	email_ id(varchar(20)),
+*************************************
+	
+	
+	CREATE TABLE CustomerDetails(
+	Application_Id number, FOREIGN KEY(Application_id) 
+	REFERENCES loanapplication(application_id),
+	Applicant_Name VARCHAR2(20),
+	Date_Of_Birth DATE,
+	Martial_Status VARCHAR2(10),
+	Phone_Number NUMBER,
+	Mobile_Number NUMBER,
+	CountOfDependents NUMBER,
+	Email_Id VARCHAR2(20));
+	
+	
+	SQL> INSERT INTO CustomerDetails values(1001,'Rahul Juneja','13-NOV-1994','Unmarried',022102030,9950748596,2,'rahul@gmail.com');
+	
+		
+************************************
+	iii.
+	
+	LoanProgramsOffered: 
+	ProgramName (varchar(5)), 
+	description (varchar(20)), 
+	type(varchar(00)), 
+	durationinyears(number), 
+	minloanamount(number),
+	maxloanamount(number),
+	rateofinterest(number), 
+	proofs_required(varchar(20))
+
+    Note: Loan types are Purchase
+    ,Construction,Extension,Renovation
+************************************	
+
+	CREATE TABLE LoanProgramsOffered(
+	ProgramName VARCHAR2(5),
+	Description VARCHAR2(20),
+	types VARCHAR2(10),
+	DurationInYears number,
+	MinLoanAmount number,
+	MaxLoanAmount number,
+	RateOfInterest number,
+	Proofs_Required VARCHAR2(20));
+	
+	
+	SQL> INSERT INTO LoanProgramsOffered values('HL01','Simple Home Loan','Renovation',15,1000000,5000000,8,'Adahar Card,License');
+		
+************************************
+	iv.
+	
+	ApprovedLoans:
+	Application_Id number, FOREIGN KEY(Application_id) 
+	REFERENCES loanapplication(application_id), 
+	Customer_name(varchar(20),
+	amountofloangranted(number),
+	monthlyinstallment(number),
+	yearstimeperiod(number), 
+	downpayment(number),
+	rateofinterest(number), 
+	totalamountpayable(number)
+************************************
+	
+	
+	CREATE TABLE ApprovedLoans(
+	Application_Id number, FOREIGN KEY(Application_id) 
+	REFERENCES loanapplication(application_id),
+	Customer_Name VARCHAR2(20),
+	AmountOfLoanGranted number,
+	MonthlyInstallment number,
+	YearsTimePeriod number,
+	DownPayment number,
+	RateOfInterest number,
+	TotalAmountPayable number);
+	
+	SQL> SQL> INSERT INTO ApprovedLoans value ('Rahul Juneja',2000000,20000,7,100000,8,1900000);
+	
+	
+************************************
+	v.
+	
+	Users : 
+	login_id(varchar(5),
+	password(varchar(10)), 
+	role(varchar(5))
+************************************
+	
+	
+	CREATE TABLE Users(
+	Login_Id VARCHAR2(5),
+	Password VARCHAR2(10),
+	Role VARCHAR2(5));
+	
+	
+	SQL> INSERT INTO Users values('rj','crazy','admin');
+	
+	
+	
